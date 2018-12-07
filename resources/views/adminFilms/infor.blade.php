@@ -1,10 +1,13 @@
 @extends('adminLayout.layout')
 @section('main')
+<?php
+	foreach ($film as $key) :
+?>
 		<div class="right_col" role="main">
           	<div class="">
             	<div class="page-title">
               		<div class="title_left">
-                		<h3><?php echo $film->name; ?></h3>
+                		<h3><?php echo $key->name; ?></h3>
               		</div>
             	</div>
             
@@ -23,52 +26,52 @@
 	                      <div class="profile_img">
 	                        <div id="crop-avatar">
 	                          <!-- Current avatar -->
-	                          <img class="img-responsive avatar-view" src="{{asset('img/'.$film->image)}}" alt="Avatar" title="Change the avatar">
+	                          <img class="img-responsive avatar-view" src="{{asset('img/'.$key->image)}}" alt="Avatar" title="Change the avatar">
 	                        </div>
 	                      </div>
-	                      <h3><?php echo $film->name; ?></h3>
+	                      <h3><?php echo $key->name; ?></h3>
 
 	                      <ul class="list-unstyled user_data">
-	                        <li><i class="fa fa-map-marker user-profile-icon"></i> Quốc gia :<?php echo $film->country; ?>
+	                        <li><i class="fa fa-map-marker user-profile-icon"></i> Quốc gia :<?php echo $key->country; ?>
 	                        </li>
 
 	                        <li>
-	                          <i class="fa fa-briefcase user-profile-icon"></i> Công ty sán xuất :<?php echo $film->production_company; ?>
+	                          <i class="fa fa-briefcase user-profile-icon"></i> Công ty sán xuất :<?php echo $key->production_company; ?>
 	                        </li>
 
 
 	                        <li>
-	                           Đạo diễn :<?php echo $film->directors; ?>
+	                           Đạo diễn :<?php echo $key->directors; ?>
 	                        </li>
 
 	                        <li>
-	                        	Diễn viên :<?php echo $film->actors; ?>
+	                        	Diễn viên :<?php echo $key->actors; ?>
 	                        </li>
 
 	                        <li>
-	                        	Ngày chiếu :<?php echo $film->date; ?>
+	                        	Ngày chiếu :<?php echo $key->date; ?>
 	                        </li>
 
 	                        <li>
-	                        	Thời lượng :<?php echo $film->time; ?> Phút
+	                        	Thời lượng :<?php echo $key->time; ?> Phút
 	                        </li>
 
 	                        <li>
-	                        	Loại film(3D/2D) :<?php if ($film->is_3d == 1) {
+	                        	Loại film(3D/2D) :<?php if ($key->is_3d == 1) {
 	                        		echo ' Film 3D';
 	                        	}
 	                        	else echo "Film 2D"; ?>
 	                        </li>
 
 	                        <li>
-	                        	Mới :<?php if ($film->is_new == 1) {
+	                        	Mới :<?php if ($key->is_new == 1) {
 	                        		echo ' Film mới';
 	                        	}
 	                        	else echo "Film cũ"; ?>
 	                        </li>
 
 	                        <li>
-	                        	Đang chiếu :<?php if ($film->status == 1) {
+	                        	Đang chiếu :<?php if ($key->status == 1) {
 	                        		echo ' Có';
 	                        	}
 	                        	else echo " Không"; ?>
@@ -83,7 +86,7 @@
 	                    <div class="col-md-9 col-sm-9 col-xs-12">
 	                    	<div>
 	                    		<video width="100%" controls>
-								  <source src="{{asset('video/'. $film->trailer)}}" type="video/mp4">
+								  <source src="{{asset('video/'. $key->trailer)}}" type="video/mp4">
 								  Trình duyệt của bạn không hỗ trợ HTML5.
 								</video>
 	                    	</div>
@@ -164,7 +167,7 @@
 		                          </div>
 
 		                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="profile-tab">
-		                            <p><?php echo $film->content; ?></p>
+		                            <p><?php echo $key->content; ?></p>
 		                          </div>
 
 		                        </div>
@@ -176,4 +179,7 @@
             	</div>
           	</div>
         </div>
+<?php
+	endforeach;
+?>
 @endsection

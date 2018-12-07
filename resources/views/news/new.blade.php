@@ -2,12 +2,7 @@
 @section('main')
 	<section class="content">
 		<div class="content-body">
-			<div class=" banner-left">
-				<a href=""><img src="img/123.jpg" alt=""></a>
-			</div>
-			<div class=" banner-right">
-				<a href=""><img src="img/bn-right.jpg" alt=""></a>
-			</div>
+			
 		</div>
 		<div id="BodyContent_ctl00_mainPanel" class="ecm-panel" style="position: relative;">
 

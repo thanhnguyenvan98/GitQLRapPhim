@@ -18,8 +18,8 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'/films'],function(){
 	Route::get('dangChieu','filmsController@getFilms')->name('dangChieu');
-	Route::get('sapChieu','filmsController@filmSapChieu')->name('sapChieu');
-	Route::get('infor','filmsController@getFilm')->name('infor');
+	Route::get('sapChieu','filmsController@getFilmSapChieu')->name('sapChieu');
+	Route::get('infor/{id}','filmsController@getFilm')->name('inforFilm');
 });
 
 Route::group(['prefix'=>'/members'],function(){
@@ -45,6 +45,8 @@ Route::group(['prefix'=>'/pay'],function(){
 
 //ADMIN ROUTE
 
+
+
 Route::group(['prefix'=>'/Admin'],function(){
 	
 	Route::get('index',function(){
@@ -55,7 +57,11 @@ Route::group(['prefix'=>'/Admin'],function(){
 		Route::get('filmList','adminFilmsController@getFilms')->name('listFilm');
 		Route::get('filmInfor/{id}','adminFilmsController@getFilm');
 		Route::get('filmEdit/{id}','adminFilmsController@getFormEdit')->name('filmEdit');
-		Route::post('confirmEdit/{id?}','adminFilmsController@confirmEdit')->name('confirmEdit');
+		Route::post('checkDataEdit/{id?}','adminFilmsController@checkDataEdit')->name('checkDataEdit');
+		Route::get('sua','adminFilmsController@edit')->name('suaFilm');
+		Route::get('filmCreate','adminFilmsController@getCreate')->name('getFilmCreate');
+		Route::post('postFilmCreate','adminFilmsController@postCreate')->name('postFilmCreate');
+		Route::get('filmDelete/{id}','adminFilmsController@delete')->name('deleteFilm');
 	});
 });
 	

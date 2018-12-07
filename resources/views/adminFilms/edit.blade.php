@@ -1,11 +1,14 @@
 @extends('adminLayout.layout')
 @section('main')
 <div class="right_col" role="main">
+
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3>Film Edit</h3>
+
               </div>
+              <div class="title_left">
+                <h3>Film Edit </h3>
+                
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -39,23 +42,31 @@
                       		<li><a class="close-link"><i class="fa fa-close"></i></a>
                       		</li>
                     	</ul>
-                   	<div class="clearfix"></div>
+                   	<div class="clearfix">
+                   		<center>
+			                	<?php
+				                	if (session('thongBao')) {
+				                		echo '<h3 style="text-align: center; color: red">Lỗi</h3>';
+				                		$a = (array)session('thongBao');
+				                		foreach ($a as $key => $value) {
+				                			echo '<p style="color : red">'.$value.'</p>';
+				                		}
+				                	}
+			                	?>
+			                </center>
+                   	</div>
                   	</div>
                   	<div class="x_content">
 						    <br />
-						    <form class="form-horizontal form-label-left" action="{{asset('Admin/film/confirmEdit/' . $id)}}" method="POST" enctype="multipart/form-data">
+						    
+						    <form class="form-horizontal form-label-left" action="{{asset('Admin/film/checkDataEdit/' . $id)}}" method="POST" enctype="multipart/form-data">
 						    	@csrf
 
 						      <div class="form-group">
 						        <label class="control-label col-md-3 col-sm-3 col-xs-12">Name <span class="required" style="color: red"> (*) </span></label>
+
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <input type="text" id="name" name="name" class="form-control" placeholder="Tên film" <?php echo "value='".$data[0]['name']."'"; ?> >
-						          <p style="color: red">
-						          	<?php if (count($errors) != 0)
-						          		if(isset($errors['name']))
-						          			echo $errors['name'];
-						          	?>
-						          </p>
 						        </div>
 						      </div>
 						      <div class="form-group">
@@ -74,12 +85,7 @@
 						        <label class="control-label col-md-3 col-sm-3 col-xs-12">Production company<span class="required" style="color: red"> (*) </span> </label>
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <input type="text" id="production_company" name="production_company" class="form-control" placeholder="Công ty sản xuất" <?php echo "value='".$data[0]['production_company']."'"; ?> >
-						          <p style="color: red">
-						          	<?php if (count($errors) != 0)
-						          		if(isset($errors['production_company']))
-						          			echo $errors['production_company'];
-						          	?>
-						          </p>
+						          
 						        </div>
 						      </div>
 						      <div class="form-group">
@@ -111,18 +117,10 @@
 						        <label class="control-label col-md-3 col-sm-3 col-xs-12">Country <span class="required" style="color: red"> (*) </span> </label>
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <input type="text" id="country" name="country" class="form-control" value="<?php echo $data[0]['country'] ?>">
-						          <p style="color: red">
-						          	<?php if (count($errors) != 0)
-						          		if(isset($errors['country']))
-						          			echo $errors['country'];
-						          	?>
-						          </p>
 						        </div>
 						      </div>
-
 						      <div class="form-group">
 						        <label class="col-md-3 col-sm-3 col-xs-12 control-label">3D </label>
-
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <div class="checkbox">
 						            <label>
@@ -131,11 +129,8 @@
 						          </div>
 						        </div>
 						      </div>
-
-
 						      <div class="form-group">
 						        <label class="col-md-3 col-sm-3 col-xs-12 control-label">New </label>
-
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <div class="checkbox">
 						            <label>
@@ -144,10 +139,8 @@
 						          </div>
 						        </div>
 						      </div>
-
 						      <div class="form-group">
 						        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Status </label>
-
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <div class="checkbox">
 						            <label>
@@ -156,16 +149,12 @@
 						          </div>
 						        </div>
 						      </div>
-
 						      <div class="form-group">
-						        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image <span class="required" style="color: red"> (*) </span> </label>
+						        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image </label>
 						        <div class="col-md-9 col-sm-9 col-xs-12">
 						          <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg" >
 						          <p style="color: red">
-						          	<?php if (count($errors) != 0)
-						          		if(isset($errors['image']))
-						          			echo $errors['image'];
-						          	?>
+						          	
 						          </p>
 						          <p><?php echo $data[0]['image'] ?></p>
 						          <div id="demoImage">
@@ -173,7 +162,6 @@
 						          </div>
 						        </div>
 						      </div>
-
 						      <div class="form-group">
 						        <label class="control-label col-md-3 col-sm-3 col-xs-12">Trailer </label>
 						        <div class="col-md-9 col-sm-9 col-xs-12">
@@ -187,23 +175,40 @@
 						          </div>
 						        </div>
 						      </div>
-
 						      <div class="ln_solid"></div>
-						      <div class="form-group">
-						        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-						          <button type="button" class="btn btn-primary" onclick="history.back()">Cancel</button>
-						          <button type="reset" class="btn btn-primary">Reset</button>
-						          <button type="submit" class="btn btn-success" name="submit" id="submit" >Submit</button>
-						        </div>
-						      </div>
-
+						      	<div class="form-group">
+							        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+							          <button type="button" class="btn btn-primary" onclick="history.back()">Cancel</button>
+							          <button type="reset" class="btn btn-primary">Reset</button>
+							          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button>
+							        </div>
+						      	</div>
+								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								        Bạn có chắc chắn muốn thay đổi không ?
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+								        <button type="submit" class="btn btn-primary">Save changes</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
 						    </form>
+						    
 						  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
 
 @endsection

@@ -1,11 +1,20 @@
 @extends('adminlayout.layout')
 
 @section('main')
+
 <div class="right_col" role="main">
+  <h3 style="color: blue">
+    <?php 
+      if (session('message')) {
+        echo session('message');
+      }
+    ?>
+  </h3>
           <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h3>List Film</h3>
+                <a href="{{route('getFilmCreate')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create</a>
               </div>
 
               <div class="title_right">
@@ -20,7 +29,10 @@
               </div>
             </div>
             
-            <div class="clearfix"></div>
+            <div class="clearfix">
+              
+              
+            </div>
 
             <div class="row">
               <div class="col-md-12">
@@ -45,6 +57,19 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <div>
+                      <center>
+                        <?php
+                          if (session('error')) {
+                            echo '<h3 style="text-align: center; color: red">Lỗi</h3>';
+                            echo '<p style="color : red">'.session('error').'</p>';
+                          }
+                          if (session('messagexoa')) {
+                            echo '<p style="color : red">'.session('messagexoa').'</p>';
+                          }
+                        ?>
+                      </center>
+                    </div>
 
                     <!-- start project list -->
                     <table class="table table-striped projects">
@@ -84,14 +109,33 @@
                             else echo "Off";
                              ?></button>
                           </td>
+                          <div class="modal fade" id="exampleModal{{$film->id_film}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  Bạn có chắc chắn muốn xóa không ?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-xs" data-dismiss="modal"> No </button>
+                                  <a href="filmDelete/<?php echo $film->id_film; ?>" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Delete </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <td>
                             <a href="filmInfor/<?php echo $film->id_film; ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                             <a href="filmEdit/<?php echo $film->id_film; ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            
+                            <button type="button" class="btn btn-primary btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal{{$film->id_film}}"><i class="fa fa-trash-o"></i>Delete</button>
                           </td>
+                          
                         </tr>
-
-
                         <?php
                           endforeach;
                         ?>

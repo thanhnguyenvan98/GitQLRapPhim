@@ -16,12 +16,7 @@
 				</div>
 			</div>
 			<div class="content-body">
-				<div class=" banner-left">
-					<a href=""><img src="img/123.jpg" alt=""></a>
-				</div>
-				<div class=" banner-right">
-					<a href=""><img src="img/bn-right.jpg" alt=""></a>
-				</div>
+				
 				<div class="tab-header">
 					<div class="container">
 						<div class="row">

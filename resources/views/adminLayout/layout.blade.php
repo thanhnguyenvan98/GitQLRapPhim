@@ -337,6 +337,12 @@
     <!-- Custom Theme Scripts -->
     <script src="{{asset('js/jsAdmin/custom.min.js')}}"></script>
     <script src="{{asset('js/jsAdmin/me.js')}}"></script>
+    <script type="text/javascript">
+      function dialog()
+      {
+        $('#my_dialog').dialog();
+      }
+    </script>
   
   </body>
 </html>
